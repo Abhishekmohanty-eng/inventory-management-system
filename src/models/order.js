@@ -1,38 +1,30 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 const ObjectId = mongoose.Schema.Types.ObjectId
 
+
 const orderSchema = new mongoose.Schema({
-    customerName: {
-        type: String,
-        required: true
-    },
-    invoiceNumber: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    customerFullAddress: {
-        type: String,
-        required: true
-    },
-    orderLineItems: {
-        type: ObjectId,
-        ref: "orderLineItems",
-        required: true
-    },
+    customerName: String,
+    customerFullAddress: String,
+    orderLineItems:
+        [{
+            orderLIneItemId: {
+                type: ObjectId,
+                ref: 'orderLIneItem'
+            }
+
+        }],
+    date: Date,
     status: {
         type: String,
-        default: "GENERATED",
-        enum: ["GENERATED", "COMPLETED", "CANCELLED"]
+        enum: ['GENERATED', 'COMPLETED', 'CANCELLED'],
+        default: 'GENERATED'
     },
-    date: {
-        type: Date,
-        required: true
-    },
+    invoiceNumer: Number,
     deleted: {
         type: Boolean,
         default: false
-    },
-}, { timestamps: true })
+    }
+}, { timestamps: true });
 
-module.exports = mongoose.model('Order', orderSchema)
+module.exports = mongoose.model('order', orderSchema)
+

@@ -1,6 +1,6 @@
 const grnModel = require('../models/grn')
 
-const createGrn = async (req,res) =>{
+const creatingGrn = async (req,res) =>{
     req.body.date = Date.now()
     let data = await grnModel.create(req.body)
     return res.status(201).send({status : 'GENERATED', data : data})
@@ -51,7 +51,7 @@ const updateGrnStatus = async (req,res) =>{
 }
 
 module.exports = {
-    createGrn,
+    creatingGrn,
     getGrn,
     updateGrn,
     deleteGrn,
